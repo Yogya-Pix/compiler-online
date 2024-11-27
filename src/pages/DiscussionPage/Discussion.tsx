@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "./Discussion.css"; // For styling
 
-const Discussion = () => {
-    const [comments, setComments] = useState([]);
-    const [newComment, setNewComment] = useState("");
+// Define types for the comment data
+interface Comment {
+  id: number;
+  text: string;
+  user: string;
+}
+
+const Discussion: React.FC = () => {
+    const [comments, setComments] = useState<Comment[]>([]); // Define the state type
+    const [newComment, setNewComment] = useState<string>(""); // Define the state type for the new comment
 
     // Fetch existing comments (Mock API or Firebase integration)
     useEffect(() => {
         // Replace this with your API or Firebase call
-        const mockComments = [
+        const mockComments: Comment[] = [
             { id: 1, text: "This is a great discussion!", user: "Alice" },
             { id: 2, text: "I learned so much from this project!", user: "Bob" },
         ];
@@ -18,7 +25,7 @@ const Discussion = () => {
     // Handle new comment submission
     const handleAddComment = () => {
         if (newComment.trim()) {
-            const newEntry = {
+            const newEntry: Comment = {
                 id: comments.length + 1,
                 text: newComment,
                 user: "CurrentUser", // Replace with actual user info
